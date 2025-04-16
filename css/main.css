@@ -1,0 +1,195 @@
+/* Reset and Base Styles */
+:root
+{
+    /* Color Variables */
+    --background-color: #f8f5ed;
+    --text-color: #252525;
+    --link-color: #a7684b;
+    --secondary-text-color: #666;
+    --border-color: #ddd;
+
+    /* Font Size Variables */
+    --base-font-size: 24px;
+    --h1-font-size: 4rem;
+    --h2-font-size: 2.5rem;
+    --small-font-size: 1.5rem;
+}
+
+html, body
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    /* Using the variables instead of hardcoded values */
+    background-color: var(--background-color);
+    font-family: 'Courier New', monospace;
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: var(--base-font-size);
+    max-width: 60%;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    
+    /* Flexbox layout for sticky footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    font-weight: normal;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: var(--h1-font-size);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--link-color);
+}
+
+a:hover {
+    border-bottom: none;
+}
+
+/* Header and Navigation */
+header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.site-title {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.site-title a {
+    border-bottom: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul li a {
+    border-bottom: none;
+}
+
+nav ul li a:hover {
+    border-bottom: 1px solid var(--text-color);
+}
+
+/* Main Content Sections */
+main {
+    margin-bottom: 3rem;
+    flex: 1; /* This makes main expand to push footer down */
+}
+
+.hero {
+    text-align: center;
+    margin: 4rem 0;
+}
+
+.tagline {
+    margin-top: 0.5rem;
+}
+
+.links {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.links a {
+    margin: 0 0.5rem;
+    border-bottom: none;
+}
+
+.links a:hover {
+    border-bottom: 1px solid var(--text-color);
+}
+
+.introduction {
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+/* Blog Section */
+.recent-thoughts {
+    margin: 3rem 0;
+}
+
+.recent-thoughts h2 {
+    margin-bottom: 1rem;
+}
+
+.recent-thoughts ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+}
+
+.recent-thoughts li {
+    margin-bottom: 0.5rem;
+}
+
+.date {
+    color: var(--secondary-text-color);
+    margin-left: 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    max-width: 600px;
+    margin-top: auto; /* This pushes the footer to the bottom */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-divider
+{
+    width: 100%;          /* Change from 100px to 100% for full width */
+    margin: 1rem auto;
+    border: none;
+    height: 1px;          /* Reduce from 2px to 1px for a thinner line */
+    background-color: var(--text-color);
+}
+
+/* Remove the entire :before pseudo-element that creates the dot */
+.footer-divider:before
+{
+    content: none;        /* This disables the dot character */
+}
