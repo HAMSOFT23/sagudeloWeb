@@ -137,11 +137,6 @@ header
     color: var(--link-hover);
 }
 
-nav
-{
-    /* flex-grow: 1; /* Not needed with space-between */
-}
-
 nav ul
 {
     list-style: none;
@@ -161,9 +156,9 @@ nav ul li a:hover
     border-bottom: 1px solid var(--linkColor);
 }
 
-/* ========================== */
+
 /* Main Content Sections      */
-/* ========================== */
+
 
 main
 {
@@ -209,9 +204,9 @@ section
     border-bottom: none;
 }
 
-/* ========================== */
+
 /* About Section Styling      */
-/* ========================== */
+
 
 .about-section
 {
