@@ -2,7 +2,8 @@
 /* Styles for Contact Page    */
 /* ========================== */
 
-.contact-content {
+.contact-content
+{
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     gap: 2rem; /* Space between details and form */
@@ -10,13 +11,15 @@
 }
 
 .contact-details,
-.contact-form-container {
+.contact-form-container
+{
     flex: 1; /* Allow both sections to share space */
     min-width: 300px; /* Minimum width before wrapping */
 }
 
 .contact-details h2,
-.contact-form-container h2 {
+.contact-form-container h2
+{
     font-size: 1.8em; /* Slightly smaller than page title h1 */
     color: var(--textColor);
     margin-bottom: 1rem;

@@ -1,3 +1,11 @@
+@font-face
+{
+  font-family: 'DepartureMono';
+  src: url('../Fonts/DepartureMono-1.500/DepartureMono-Regular.otf'); /* Correct path from CSS folder */
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ========================== */
 /* Variables & Base Styles    */
 /* ========================== */
@@ -45,7 +53,7 @@ html, body
 body
 {
     background: var(--backgroundColor);
-    font-family: 'Courier New', monospace;
+    font-family: DepartureMono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace/*'Courier New', monospace*/;
     color: var(--textColor);
     line-height: 1.6;
     font-size: var(--base-font-size);
