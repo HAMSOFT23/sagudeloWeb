@@ -59,6 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
       // 6. Re-enable the submit button regardless of outcome
       submitButton.disabled = false;
     }
-    
+
   });
 });

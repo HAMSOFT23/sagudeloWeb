@@ -14,7 +14,8 @@ export async function onRequestPost(context) {
     const data = await context.request.json();
 
     // Validate the data (optional but good practice)
-    if (!data.name || !data.email || !data.subject || !data.message) {
+    if (!data.name || !data.email || !data.subject || !data.message) 
+    {
       return new Response(JSON.stringify({ message: 'Missing required fields' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
@@ -23,7 +24,8 @@ export async function onRequestPost(context) {
 
     // Now, we use the Resend code to send the email
     // This part runs securely on the server
-    const { data: resendData, error } = await resend.emails.send({
+    const { data: resendData, error } = await resend.emails.send
+    ({
       from: 'Contact Form <onboarding@resend.dev>', // See Note 1
       to: ['your-personal-email@example.com'],      // <-- REPLACE with your actual email
       subject: `New Message: ${data.subject}`,
