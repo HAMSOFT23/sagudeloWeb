@@ -4,6 +4,7 @@
     src: url('/minimal/Fonts/DepartureMono-1.500/DepartureMono-Regular.woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 :root
@@ -132,15 +133,6 @@ a
     text-decoration: underline;
 }
 
-a:visited,
-a:link,
-a:active,
-a:hover
-{
-    color: var(--foreground);
-    text-decoration: underline;
-}
-
 a:hover
 {
     text-decoration: none;
@@ -171,6 +163,46 @@ li
 .new-project
 {
     margin-top: 16px;
+}
+
+.title-group
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.cv-row
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.email-row
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.photo-overlay
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.photo-overlay.active
+{
+    pointer-events: auto;
 }
 
 @media only screen and (max-width: 768px)

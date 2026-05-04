@@ -1,6 +1,7 @@
 (function()
 {
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*^';
+    const INTERVAL = 40;
 
     function randomChar()
     {
@@ -23,38 +24,54 @@
             }
 
             const text = this.dataset.original;
-            let step = 0;
+            var step = 0;
+            var lastTick = 0;
 
-            clearInterval(this._scrambleInterval);
+            cancelAnimationFrame(this._scrambleRaf);
 
-            this._scrambleInterval = setInterval(function()
+            function tick(timestamp)
             {
-                let result = '';
-                for (let i = 0; i < text.length; i++)
+                if (!lastTick)
                 {
-                    if (i < step)
-                    {
-                        result += text[i];
-                    }
-                    else
-                    {
-                        result += randomChar();
-                    }
+                    lastTick = timestamp;
                 }
-                link.textContent = result;
-                step++;
+
+                var elapsed = timestamp - lastTick;
+
+                if (elapsed >= INTERVAL)
+                {
+                    var result = '';
+                    for (var i = 0; i < text.length; i++)
+                    {
+                        if (i < step)
+                        {
+                            result += text[i];
+                        }
+                        else
+                        {
+                            result += randomChar();
+                        }
+                    }
+                    link.textContent = result;
+                    step++;
+                    lastTick = timestamp;
+                }
 
                 if (step > text.length)
                 {
-                    clearInterval(link._scrambleInterval);
                     link.textContent = text;
+                    return;
                 }
-            }, 40);
+
+                link._scrambleRaf = requestAnimationFrame(tick);
+            }
+
+            link._scrambleRaf = requestAnimationFrame(tick);
         });
 
         link.addEventListener('mouseleave', function()
         {
-            clearInterval(this._scrambleInterval);
+            cancelAnimationFrame(this._scrambleRaf);
             if (this.dataset.original)
             {
                 this.textContent = this.dataset.original;
