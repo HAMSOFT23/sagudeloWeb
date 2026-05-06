@@ -64,12 +64,9 @@
 
     const items = [];
     const mouse = { x: -9999, y: -9999 };
-    const REPULSION_RADIUS = 250;
-    const REPULSION_STRENGTH = 0.8;
-    const SPRING_STRENGTH = 0.008;
-    const DAMPING = 0.96;
-    const COLLISION_RADIUS = 100;
-    const COLLISION_STRENGTH = 0.5;
+    const REPULSION_RADIUS = 150;
+    const REPULSION_STRENGTH = 0.25;
+    const DAMPING = 0.92;
 
     function lerp(a, b, t)
     {
@@ -241,34 +238,6 @@
         mouse.y = -9999;
     });
 
-    function applyCollision(a, b)
-    {
-        if (a.phase !== "normal" || b.phase !== "normal") return;
-
-        const aCenterX = a.x + a.width / 2;
-        const aCenterY = a.y + a.height / 2;
-        const bCenterX = b.x + b.width / 2;
-        const bCenterY = b.y + b.height / 2;
-
-        const dx = aCenterX - bCenterX;
-        const dy = aCenterY - bCenterY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        const minDist = COLLISION_RADIUS * 2;
-
-        if (dist < minDist && dist > 0)
-        {
-            const force = (1 - dist / minDist) * COLLISION_STRENGTH;
-            const pushX = (dx / dist) * force;
-            const pushY = (dy / dist) * force;
-
-            a.vx += pushX;
-            a.vy += pushY;
-            b.vx -= pushX;
-            b.vy -= pushY;
-        }
-    }
-
     function animate()
     {
         overlayOpacity = lerp(overlayOpacity, targetOverlayOpacity, 0.15);
@@ -280,14 +249,6 @@
         }
 
         const time = Date.now() * 0.001;
-
-        for (let i = 0; i < items.length; i++)
-        {
-            for (let j = i + 1; j < items.length; j++)
-            {
-                applyCollision(items[i], items[j]);
-            }
-        }
 
         items.forEach(function(item)
         {
@@ -347,15 +308,12 @@
                 if (dist < REPULSION_RADIUS && dist > 0)
                 {
                     const force = Math.pow(1 - dist / REPULSION_RADIUS, 2) * REPULSION_STRENGTH;
-                    item.vx += (dx / dist) * force;
-                    item.vy += (dy / dist) * force;
-                }
+                item.vx += (dx / dist) * force;
+                item.vy += (dy / dist) * force;
+            }
 
-                item.vx += (item.homeX - item.x) * SPRING_STRENGTH;
-                item.vy += (item.homeY - item.y) * SPRING_STRENGTH;
-
-                item.vx += Math.sin(time + item.driftOffset) * 0.02;
-                item.vy += Math.cos(time + item.driftOffset) * 0.02;
+            item.vx += Math.sin(time + item.driftOffset) * 0.008;
+            item.vy += Math.cos(time + item.driftOffset) * 0.008;
 
                 item.vx *= DAMPING;
                 item.vy *= DAMPING;

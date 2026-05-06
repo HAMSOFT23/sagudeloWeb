@@ -7184,4 +7184,10 @@ All 10 optimizations applied. Here's the summary:
 | 10 | `photos.js` | `img.loading = "lazy"` on all dynamically created photos |
 
 ---
+Good work. Now let's re-work the photos behaviour. 
+1. Let's get rid of the bouncy behaviour, they shall not go back to it's original position.
+2. Decrease a bit the cursor repulsion strength.
 
+Good work. Now let's re-work the photos behaviour. 
+1. Let's get rid of the bouncy behaviour, they shall not go back to it's original position.
+2. Decrease a bit the cursor repulsion strength.
