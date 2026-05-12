@@ -65,8 +65,13 @@
     const items = [];
     const mouse = { x: -9999, y: -9999 };
     const REPULSION_RADIUS = 150;
+    const REPULSION_RADIUS_SQ = REPULSION_RADIUS * REPULSION_RADIUS;
+    const WAKE_RADIUS_SQ = (REPULSION_RADIUS + 50) * (REPULSION_RADIUS + 50);
     const REPULSION_STRENGTH = 0.25;
+    const SPRING_STRENGTH = 0.008;
     const DAMPING = 0.92;
+    const SLEEP_VELOCITY_THRESHOLD = 0.01;
+    const SLEEP_POSITION_THRESHOLD = 1;
 
     function lerp(a, b, t)
     {
@@ -83,7 +88,17 @@
 
     function applyTransform(item, scale)
     {
-        item.el.style.transform = "translate(" + item.x + "px, " + item.y + "px) scale(" + scale + ") rotate(" + item.rotation + "deg)";
+        const tx = item.x;
+        const ty = item.y;
+        const rot = item.rotation;
+        if (tx !== item._lastTx || ty !== item._lastTy || scale !== item._lastScale || rot !== item._lastRot)
+        {
+            item.el.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + scale + ") rotate(" + rot + "deg)";
+            item._lastTx = tx;
+            item._lastTy = ty;
+            item._lastScale = scale;
+            item._lastRot = rot;
+        }
     }
 
     function createOverlay()
@@ -120,6 +135,7 @@
         item.targetY = (vh - imgH) / 2;
         item.targetRotation = 0;
         item.phase = "expanding";
+        item.sleeping = false;
         item.el.style.zIndex = "11";
 
         targetOverlayOpacity = 1;
@@ -137,6 +153,7 @@
         item.targetY = item.homeY;
         item.targetRotation = item.originalRotation;
         item.phase = "collapsing";
+        item.sleeping = false;
 
         targetOverlayOpacity = 0;
         overlay.classList.remove("active");
@@ -199,7 +216,12 @@
                 targetScale: 1,
                 targetX: homeX,
                 targetY: homeY,
-                targetRotation: rot
+                targetRotation: rot,
+                sleeping: false,
+                _lastTx: null,
+                _lastTy: null,
+                _lastScale: null,
+                _lastRot: null
             });
 
             img.onload = function()
@@ -249,6 +271,9 @@
         }
 
         const time = Date.now() * 0.001;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const margin = 100;
 
         items.forEach(function(item)
         {
@@ -269,12 +294,10 @@
                 }
 
                 applyTransform(item, item.currentScale);
-                item.img.style.filter = "brightness(1)";
             }
             else if (item.phase === "expanded")
             {
                 applyTransform(item, item.currentScale);
-                item.img.style.filter = "brightness(1)";
             }
             else if (item.phase === "collapsing")
             {
@@ -294,26 +317,42 @@
                 }
 
                 applyTransform(item, item.currentScale);
-                item.img.style.filter = "brightness(1)";
             }
             else
             {
-                const centerX = item.x + item.width / 2;
-                const centerY = item.y + item.height / 2;
-
+                const centerX = item.x + item.width * 0.5;
+                const centerY = item.y + item.height * 0.5;
                 const dx = centerX - mouse.x;
                 const dy = centerY - mouse.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+                const sqDist = dx * dx + dy * dy;
 
-                if (dist < REPULSION_RADIUS && dist > 0)
+                if (item.sleeping && sqDist > WAKE_RADIUS_SQ)
                 {
-                    const force = Math.pow(1 - dist / REPULSION_RADIUS, 2) * REPULSION_STRENGTH;
-                item.vx += (dx / dist) * force;
-                item.vy += (dy / dist) * force;
-            }
+                    return;
+                }
 
-            item.vx += Math.sin(time + item.driftOffset) * 0.008;
-            item.vy += Math.cos(time + item.driftOffset) * 0.008;
+                item.sleeping = false;
+
+                if (item.x + item.width < -margin || item.x > vw + margin ||
+                    item.y + item.height < -margin || item.y > vh + margin)
+                {
+                    return;
+                }
+
+                if (sqDist < REPULSION_RADIUS_SQ && sqDist > 0)
+                {
+                    const dist = Math.sqrt(sqDist);
+                    const t = 1 - dist / REPULSION_RADIUS;
+                    const force = t * t * REPULSION_STRENGTH;
+                    item.vx += (dx / dist) * force;
+                    item.vy += (dy / dist) * force;
+                }
+
+                item.vx += (item.homeX - item.x) * SPRING_STRENGTH;
+                item.vy += (item.homeY - item.y) * SPRING_STRENGTH;
+
+                item.vx += Math.sin(time + item.driftOffset) * 0.008;
+                item.vy += Math.cos(time + item.driftOffset) * 0.008;
 
                 item.vx *= DAMPING;
                 item.vy *= DAMPING;
@@ -321,21 +360,23 @@
                 item.x += item.vx;
                 item.y += item.vy;
 
-                const vw = window.innerWidth;
-                const vh = window.innerHeight;
-
                 if (item.y < 140) item.y = 140;
                 if (item.x < 10) item.x = 10;
                 if (item.x > vw - item.width - 10) item.x = vw - item.width - 10;
                 if (item.y > vh - item.height - 10) item.y = vh - item.height - 10;
 
-                var rotation = item.originalRotation + (item.vx * 0.5);
-                const hoverDist = 60;
-                const isHovered = dist < hoverDist;
-                const brightness = isHovered ? 1.15 : 0.9;
-
                 applyTransform(item, 1);
-                item.img.style.filter = "brightness(" + brightness + ")";
+
+                const velSq = item.vx * item.vx + item.vy * item.vy;
+                const homeDX = item.x - item.homeX;
+                const homeDY = item.y - item.homeY;
+                if (velSq < SLEEP_VELOCITY_THRESHOLD * SLEEP_VELOCITY_THRESHOLD &&
+                    Math.abs(homeDX) < SLEEP_POSITION_THRESHOLD &&
+                    Math.abs(homeDY) < SLEEP_POSITION_THRESHOLD &&
+                    sqDist > REPULSION_RADIUS_SQ)
+                {
+                    item.sleeping = true;
+                }
             }
         });
 

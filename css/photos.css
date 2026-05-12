@@ -45,6 +45,13 @@
     object-fit: cover;
     border-radius: 4px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: filter 0.2s ease;
+    filter: brightness(0.9);
+}
+
+.floating-photo:hover img
+{
+    filter: brightness(1.15);
 }
 
 @media only screen and (max-width: 768px)
