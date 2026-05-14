@@ -2,7 +2,7 @@
 {
     const baseImages =
     [
-        { src: "images/DSCN3863.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
+        { src: "images/DSCN3863.jpg",  url: "https://www.instagram.com/sagudelophoto/", description: "Take me back to that day" },
         { src: "images/DSCN4315.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
         { src: "images/DSCN4518.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
         { src: "images/DSCN4532.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
@@ -32,7 +32,7 @@
         { src: "images/DSCN6097.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
         { src: "images/DSCN6110.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
         { src: "images/DSCN6114.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6132.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
+        { src: "images/DSCN6132.JPG",  url: "https://www.instagram.com/sagudelophoto/" , description: "I often think about her" },
         { src: "images/DSCN6135.JPG",  url: "https://www.instagram.com/vab_.14" },
         { src: "images/DSCN6138.JPG",  url: "https://www.instagram.com/vab_.14" },
         { src: "images/DSCN6284.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
@@ -40,7 +40,7 @@
         { src: "images/DSCN6290.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
         { src: "images/DSCN6296.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
         { src: "images/DSCN6312.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6313.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
+        { src: "images/DSCN6313.JPG",  url: "https://www.instagram.com/sagudelophoto/" , description: "A truly beautiful city" },
         { src: "images/DSCN6317.JPG",  url: "https://www.instagram.com/sagudelophoto/" }
     ];
 
@@ -50,7 +50,8 @@
         photos.push(
         {
             src: baseImages[i].src,
-            url: baseImages[i].url
+            url: baseImages[i].url,
+            description: baseImages[i].description || null
         });
     }
 
@@ -61,6 +62,7 @@
     var overlay = null;
     var overlayOpacity = 0;
     var targetOverlayOpacity = 0;
+    var tooltipEl = null;
 
     const items = [];
     const mouse = { x: -9999, y: -9999 };
@@ -68,10 +70,8 @@
     const REPULSION_RADIUS_SQ = REPULSION_RADIUS * REPULSION_RADIUS;
     const WAKE_RADIUS_SQ = (REPULSION_RADIUS + 50) * (REPULSION_RADIUS + 50);
     const REPULSION_STRENGTH = 0.25;
-    const SPRING_STRENGTH = 0.008;
-    const DAMPING = 0.92;
+    const DAMPING = 0.97;
     const SLEEP_VELOCITY_THRESHOLD = 0.01;
-    const SLEEP_POSITION_THRESHOLD = 1;
 
     function lerp(a, b, t)
     {
@@ -117,6 +117,45 @@
         });
     }
 
+    function createTooltip(text)
+    {
+        if (tooltipEl)
+        {
+            tooltipEl.remove();
+        }
+        tooltipEl = document.createElement("div");
+        tooltipEl.className = "photo-tooltip";
+        tooltipEl.textContent = text;
+        tooltipEl.style.opacity = "0";
+        document.body.appendChild(tooltipEl);
+    }
+
+    function destroyTooltip()
+    {
+        if (tooltipEl)
+        {
+            tooltipEl.remove();
+            tooltipEl = null;
+        }
+    }
+
+    function moveTooltip(e)
+    {
+        if (!tooltipEl) return;
+        tooltipEl.style.left = (e.clientX + 12) + "px";
+        tooltipEl.style.top = (e.clientY + 12) + "px";
+    }
+
+    function showTooltip()
+    {
+        if (tooltipEl) tooltipEl.style.opacity = "1";
+    }
+
+    function hideTooltip()
+    {
+        if (tooltipEl) tooltipEl.style.opacity = "0";
+    }
+
     function expandPhoto(item)
     {
         if (expandedItem && expandedItem !== item)
@@ -130,6 +169,10 @@
         const imgH = item.height || 240;
         const targetScale = Math.min((0.9 * vw) / imgW, (0.9 * vh) / imgH, 5);
 
+        item.preExpandX = item.x;
+        item.preExpandY = item.y;
+        item.preExpandRotation = item.rotation;
+
         item.targetScale = targetScale;
         item.targetX = (vw - imgW) / 2;
         item.targetY = (vh - imgH) / 2;
@@ -141,6 +184,14 @@
         targetOverlayOpacity = 1;
         overlay.classList.add("active");
         expandedItem = item;
+
+        if (item.description)
+        {
+            createTooltip(item.description);
+            item.el.addEventListener("mousemove", moveTooltip);
+            item.el.addEventListener("mouseenter", showTooltip);
+            item.el.addEventListener("mouseleave", hideTooltip);
+        }
     }
 
     function collapsePhoto()
@@ -149,8 +200,8 @@
 
         var item = expandedItem;
         item.targetScale = 1;
-        item.targetX = item.homeX;
-        item.targetY = item.homeY;
+        item.targetX = item.preExpandX;
+        item.targetY = item.preExpandY;
         item.targetRotation = item.originalRotation;
         item.phase = "collapsing";
         item.sleeping = false;
@@ -158,6 +209,14 @@
         targetOverlayOpacity = 0;
         overlay.classList.remove("active");
         expandedItem = null;
+
+        if (item.description)
+        {
+            item.el.removeEventListener("mousemove", moveTooltip);
+            item.el.removeEventListener("mouseenter", showTooltip);
+            item.el.removeEventListener("mouseleave", hideTooltip);
+            destroyTooltip();
+        }
     }
 
     function createPhotoElements()
@@ -204,8 +263,6 @@
                 y: homeY,
                 vx: 0,
                 vy: 0,
-                homeX: homeX,
-                homeY: homeY,
                 rotation: rot,
                 originalRotation: rot,
                 driftOffset: Math.random() * Math.PI * 2,
@@ -218,6 +275,10 @@
                 targetY: homeY,
                 targetRotation: rot,
                 sleeping: false,
+                description: photo.description,
+                preExpandX: homeX,
+                preExpandY: homeY,
+                preExpandRotation: rot,
                 _lastTx: null,
                 _lastTy: null,
                 _lastScale: null,
@@ -226,9 +287,8 @@
 
             img.onload = function()
             {
-                const rect = img.getBoundingClientRect();
-                items[i].width = rect.width || 180;
-                items[i].height = rect.height || 180;
+                items[i].width = Math.min(img.naturalWidth || 240, 240);
+                items[i].height = Math.min(img.naturalHeight || 240, 240);
             };
 
             link.addEventListener("click", function(e)
@@ -348,9 +408,6 @@
                     item.vy += (dy / dist) * force;
                 }
 
-                item.vx += (item.homeX - item.x) * SPRING_STRENGTH;
-                item.vy += (item.homeY - item.y) * SPRING_STRENGTH;
-
                 item.vx += Math.sin(time + item.driftOffset) * 0.008;
                 item.vy += Math.cos(time + item.driftOffset) * 0.008;
 
@@ -368,11 +425,7 @@
                 applyTransform(item, 1);
 
                 const velSq = item.vx * item.vx + item.vy * item.vy;
-                const homeDX = item.x - item.homeX;
-                const homeDY = item.y - item.homeY;
                 if (velSq < SLEEP_VELOCITY_THRESHOLD * SLEEP_VELOCITY_THRESHOLD &&
-                    Math.abs(homeDX) < SLEEP_POSITION_THRESHOLD &&
-                    Math.abs(homeDY) < SLEEP_POSITION_THRESHOLD &&
                     sqDist > REPULSION_RADIUS_SQ)
                 {
                     item.sleeping = true;

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sagudelo.com/sitemap.xml
