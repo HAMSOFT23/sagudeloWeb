@@ -1,7 +1,7 @@
 .photos-header
 {
     text-align: center;
-    padding: 32px 16px 16px;
+    padding: 32px 16px 40px;
     position: relative;
     z-index: 10;
 }
@@ -17,6 +17,12 @@
 {
     font-size: clamp(12px, 1.5vw, 16px);
     opacity: 0.6;
+}
+
+.photos-header p a
+{
+    color: var(--foreground);
+    opacity: 1;
 }
 
 #photo-canvas
@@ -35,6 +41,8 @@
     position: absolute;
     pointer-events: auto;
     cursor: pointer;
+    contain: layout style paint;
+    will-change: transform;
 }
 
 .floating-photo img

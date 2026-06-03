@@ -56,6 +56,16 @@ main
     margin: 0;
 }
 
+.blog-post
+{
+    text-align: center;
+}
+
+.blog-post .blog-entry
+{
+    margin: 0 auto;
+}
+
 @media only screen and (max-width: 768px)
 {
     .blog-list

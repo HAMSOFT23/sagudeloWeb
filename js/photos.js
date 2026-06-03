@@ -1,61 +1,50 @@
 (function()
 {
-    const baseImages =
+    var baseImages =
     [
-        { src: "images/DSCN3863.jpg",  url: "https://www.instagram.com/sagudelophoto/", description: "Take me back to that day" },
-        { src: "images/DSCN4315.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4518.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4532.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4533.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4534.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4535.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4561.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4631.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4651.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4659.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4794.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4833.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN4835.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN5095.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN5554.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN5559.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN5562.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6031.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6041.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6046.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6048.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6059.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6060.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6067.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6071.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6088.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6097.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6110.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6114.jpg",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6132.JPG",  url: "https://www.instagram.com/sagudelophoto/" , description: "I often think about her" },
-        { src: "images/DSCN6135.JPG",  url: "https://www.instagram.com/vab_.14" },
-        { src: "images/DSCN6138.JPG",  url: "https://www.instagram.com/vab_.14" },
-        { src: "images/DSCN6284.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6288.png",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6290.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6296.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6312.JPG",  url: "https://www.instagram.com/sagudelophoto/" },
-        { src: "images/DSCN6313.JPG",  url: "https://www.instagram.com/sagudelophoto/" , description: "A truly beautiful city" },
-        { src: "images/DSCN6317.JPG",  url: "https://www.instagram.com/sagudelophoto/" }
+        { src: "images/DSCN3863.jpg",  description: "Take me back to that day" },
+        { src: "images/DSCN4315.JPG" },
+        { src: "images/DSCN4518.JPG" },
+        { src: "images/DSCN4532.JPG" },
+        { src: "images/DSCN4533.JPG" },
+        { src: "images/DSCN4534.JPG" },
+        { src: "images/DSCN4535.JPG" },
+        { src: "images/DSCN4561.JPG" },
+        { src: "images/DSCN4631.JPG" },
+        { src: "images/DSCN4651.JPG" },
+        { src: "images/DSCN4659.JPG" },
+        { src: "images/DSCN4794.JPG" },
+        { src: "images/DSCN4833.JPG" },
+        { src: "images/DSCN4835.JPG" },
+        { src: "images/DSCN5095.jpg" },
+        { src: "images/DSCN5554.JPG" },
+        { src: "images/DSCN5559.JPG" },
+        { src: "images/DSCN5562.jpg" },
+        { src: "images/DSCN6031.jpg" },
+        { src: "images/DSCN6041.jpg" },
+        { src: "images/DSCN6046.jpg" },
+        { src: "images/DSCN6048.jpg" },
+        { src: "images/DSCN6059.jpg" },
+        { src: "images/DSCN6060.jpg" },
+        { src: "images/DSCN6067.jpg" },
+        { src: "images/DSCN6071.jpg" },
+        { src: "images/DSCN6088.jpg" },
+        { src: "images/DSCN6097.jpg" },
+        { src: "images/DSCN6110.jpg" },
+        { src: "images/DSCN6114.jpg" },
+        { src: "images/DSCN6132.JPG",  description: "I often think about her" },
+        { src: "images/DSCN6135.JPG" },
+        { src: "images/DSCN6138.JPG" },
+        { src: "images/DSCN6284.JPG" },
+        { src: "images/DSCN6288.png" },
+        { src: "images/DSCN6290.JPG" },
+        { src: "images/DSCN6296.JPG" },
+        { src: "images/DSCN6312.JPG" },
+        { src: "images/DSCN6313.JPG",  description: "A truly beautiful city" },
+        { src: "images/DSCN6317.JPG" }
     ];
 
-    const photos = [];
-    for (let i = 0; i < baseImages.length; i++)
-    {
-        photos.push(
-        {
-            src: baseImages[i].src,
-            url: baseImages[i].url,
-            description: baseImages[i].description || null
-        });
-    }
-
-    const canvas = document.getElementById("photo-canvas");
+    var canvas = document.getElementById("photo-canvas");
     if (!canvas) return;
 
     var expandedItem = null;
@@ -64,14 +53,16 @@
     var targetOverlayOpacity = 0;
     var tooltipEl = null;
 
-    const items = [];
-    const mouse = { x: -9999, y: -9999 };
-    const REPULSION_RADIUS = 150;
-    const REPULSION_RADIUS_SQ = REPULSION_RADIUS * REPULSION_RADIUS;
-    const WAKE_RADIUS_SQ = (REPULSION_RADIUS + 50) * (REPULSION_RADIUS + 50);
-    const REPULSION_STRENGTH = 0.25;
-    const DAMPING = 0.97;
-    const SLEEP_VELOCITY_THRESHOLD = 0.01;
+    var items = [];
+    var mouse = { x: -9999, y: -9999 };
+
+    var REPULSION_RADIUS = 150;
+    var REPULSION_RADIUS_SQ = REPULSION_RADIUS * REPULSION_RADIUS;
+    var REPULSION_STRENGTH = 0.25;
+    var SPRING_K = 0.005;
+    var DAMPING = 0.92;
+    var SLEEP_VELOCITY_SQ = 0.0001;
+    var HOME_EPSILON = 0.5;
 
     function lerp(a, b, t)
     {
@@ -88,12 +79,12 @@
 
     function applyTransform(item, scale)
     {
-        const tx = item.x;
-        const ty = item.y;
-        const rot = item.rotation;
+        var tx = item.x;
+        var ty = item.y;
+        var rot = item.rotation;
         if (tx !== item._lastTx || ty !== item._lastTy || scale !== item._lastScale || rot !== item._lastRot)
         {
-            item.el.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + scale + ") rotate(" + rot + "deg)";
+            item.el.style.transform = "translate3d(" + tx + "px," + ty + "px,0) scale(" + scale + ") rotate(" + rot + "deg)";
             item._lastTx = tx;
             item._lastTy = ty;
             item._lastScale = scale;
@@ -107,11 +98,10 @@
         overlay.className = "photo-overlay";
         canvas.appendChild(overlay);
 
-        overlay.addEventListener("click", function(e)
+        overlay.addEventListener("click", function()
         {
             if (expandedItem !== null)
             {
-                e.stopPropagation();
                 collapsePhoto();
             }
         });
@@ -163,11 +153,11 @@
             collapsePhoto();
         }
 
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const imgW = item.width || 240;
-        const imgH = item.height || 240;
-        const targetScale = Math.min((0.9 * vw) / imgW, (0.9 * vh) / imgH, 5);
+        var vw = window.innerWidth;
+        var vh = window.innerHeight;
+        var imgW = item.width || 240;
+        var imgH = item.height || 240;
+        var targetScale = Math.min((0.9 * vw) / imgW, (0.9 * vh) / imgH, 5);
 
         item.preExpandX = item.x;
         item.preExpandY = item.y;
@@ -200,8 +190,8 @@
 
         var item = expandedItem;
         item.targetScale = 1;
-        item.targetX = item.preExpandX;
-        item.targetY = item.preExpandY;
+        item.targetX = item.homeX;
+        item.targetY = item.homeY;
         item.targetRotation = item.originalRotation;
         item.phase = "collapsing";
         item.sleeping = false;
@@ -223,49 +213,50 @@
     {
         createOverlay();
 
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const headerOffset = 120;
-        const padding = 40;
+        var vw = window.innerWidth;
+        var vh = window.innerHeight;
+        var headerOffset = 210;
+        var padding = 40;
 
-        const cols = Math.ceil(Math.sqrt(photos.length * (vw / vh)));
-        const rows = Math.ceil(photos.length / cols);
-        const cellW = (vw - padding * 2) / cols;
-        const cellH = (vh - headerOffset - padding) / rows;
+        var cols = Math.ceil(Math.sqrt(baseImages.length * (vw / vh)));
+        var rows = Math.ceil(baseImages.length / cols);
+        var cellW = (vw - padding * 2) / cols;
+        var cellH = (vh - headerOffset - padding) / rows;
 
-        photos.forEach(function(photo, i)
+        for (var i = 0; i < baseImages.length; i++)
         {
-            const link = document.createElement("a");
-            link.href = photo.url;
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-            link.className = "floating-photo";
+            var photo = baseImages[i];
 
-            const img = document.createElement("img");
+            var div = document.createElement("div");
+            div.className = "floating-photo";
+
+            var img = document.createElement("img");
             img.src = photo.src;
             img.alt = photo.src.split("/").pop().split(".")[0];
             img.loading = "lazy";
-            link.appendChild(img);
+            img.decoding = "async";
+            div.appendChild(img);
 
-            canvas.appendChild(link);
+            canvas.appendChild(div);
 
-            const col = i % cols;
-            const row = Math.floor(i / cols);
-            const homeX = padding + col * cellW + (cellW / 2) - 90;
-            const homeY = headerOffset + row * cellH + (cellH / 2) - 90;
-            const rot = (Math.random() - 0.5) * 6;
+            var col = i % cols;
+            var row = Math.floor(i / cols);
+            var homeX = padding + col * cellW + (cellW / 2) - 90;
+            var homeY = headerOffset + row * cellH + (cellH / 2) - 90;
+            var rot = (Math.random() - 0.5) * 6;
 
-            items.push(
+            var item =
             {
-                el: link,
+                el: div,
                 img: img,
                 x: homeX,
                 y: homeY,
+                homeX: homeX,
+                homeY: homeY,
                 vx: 0,
                 vy: 0,
                 rotation: rot,
                 originalRotation: rot,
-                driftOffset: Math.random() * Math.PI * 2,
                 width: 240,
                 height: 240,
                 phase: "normal",
@@ -275,7 +266,7 @@
                 targetY: homeY,
                 targetRotation: rot,
                 sleeping: false,
-                description: photo.description,
+                description: photo.description || null,
                 preExpandX: homeX,
                 preExpandY: homeY,
                 preExpandRotation: rot,
@@ -283,29 +274,32 @@
                 _lastTy: null,
                 _lastScale: null,
                 _lastRot: null
-            });
-
-            img.onload = function()
-            {
-                items[i].width = Math.min(img.naturalWidth || 240, 240);
-                items[i].height = Math.min(img.naturalHeight || 240, 240);
             };
 
-            link.addEventListener("click", function(e)
+            items.push(item);
+
+            (function(idx)
             {
-                var item = items[i];
-                if (item.phase === "normal")
+                img.onload = function()
                 {
-                    e.preventDefault();
-                    expandPhoto(item);
-                }
-                else if (item.phase === "expanded")
+                    items[idx].width = Math.min(img.naturalWidth || 240, 240);
+                    items[idx].height = Math.min(img.naturalHeight || 240, 240);
+                };
+            })(i);
+
+            (function(idx)
+            {
+                div.addEventListener("click", function(e)
                 {
-                    window.open(item.el.href, "_blank");
-                    e.preventDefault();
-                }
-            });
-        });
+                    var item = items[idx];
+                    if (item.phase === "normal")
+                    {
+                        e.stopPropagation();
+                        expandPhoto(item);
+                    }
+                });
+            })(i);
+        }
     }
 
     document.addEventListener("mousemove", function(e)
@@ -330,13 +324,10 @@
             overlay.classList.remove("active");
         }
 
-        const time = Date.now() * 0.001;
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const margin = 100;
-
-        items.forEach(function(item)
+        for (var i = 0; i < items.length; i++)
         {
+            var item = items[i];
+
             if (item.phase === "expanding")
             {
                 lerpItem(item);
@@ -380,36 +371,37 @@
             }
             else
             {
-                const centerX = item.x + item.width * 0.5;
-                const centerY = item.y + item.height * 0.5;
-                const dx = centerX - mouse.x;
-                const dy = centerY - mouse.y;
-                const sqDist = dx * dx + dy * dy;
-
-                if (item.sleeping && sqDist > WAKE_RADIUS_SQ)
+                if (item.sleeping)
                 {
-                    return;
+                    var cdx = item.x + item.width * 0.5 - mouse.x;
+                    var cdy = item.y + item.height * 0.5 - mouse.y;
+                    var cSqDist = cdx * cdx + cdy * cdy;
+                    if (cSqDist > REPULSION_RADIUS_SQ)
+                    {
+                        continue;
+                    }
+                    item.sleeping = false;
                 }
 
-                item.sleeping = false;
-
-                if (item.x + item.width < -margin || item.x > vw + margin ||
-                    item.y + item.height < -margin || item.y > vh + margin)
-                {
-                    return;
-                }
+                var centerX = item.x + item.width * 0.5;
+                var centerY = item.y + item.height * 0.5;
+                var dx = centerX - mouse.x;
+                var dy = centerY - mouse.y;
+                var sqDist = dx * dx + dy * dy;
 
                 if (sqDist < REPULSION_RADIUS_SQ && sqDist > 0)
                 {
-                    const dist = Math.sqrt(sqDist);
-                    const t = 1 - dist / REPULSION_RADIUS;
-                    const force = t * t * REPULSION_STRENGTH;
+                    var dist = Math.sqrt(sqDist);
+                    var t = 1 - dist / REPULSION_RADIUS;
+                    var force = t * t * REPULSION_STRENGTH;
                     item.vx += (dx / dist) * force;
                     item.vy += (dy / dist) * force;
                 }
 
-                item.vx += Math.sin(time + item.driftOffset) * 0.008;
-                item.vy += Math.cos(time + item.driftOffset) * 0.008;
+                var dispX = item.x - item.homeX;
+                var dispY = item.y - item.homeY;
+                item.vx -= dispX * SPRING_K;
+                item.vy -= dispY * SPRING_K;
 
                 item.vx *= DAMPING;
                 item.vy *= DAMPING;
@@ -417,21 +409,20 @@
                 item.x += item.vx;
                 item.y += item.vy;
 
-                if (item.y < 140) item.y = 140;
-                if (item.x < 10) item.x = 10;
-                if (item.x > vw - item.width - 10) item.x = vw - item.width - 10;
-                if (item.y > vh - item.height - 10) item.y = vh - item.height - 10;
-
                 applyTransform(item, 1);
 
-                const velSq = item.vx * item.vx + item.vy * item.vy;
-                if (velSq < SLEEP_VELOCITY_THRESHOLD * SLEEP_VELOCITY_THRESHOLD &&
-                    sqDist > REPULSION_RADIUS_SQ)
+                var velSq = item.vx * item.vx + item.vy * item.vy;
+                var atHome = Math.abs(dispX) < HOME_EPSILON && Math.abs(dispY) < HOME_EPSILON;
+                if (velSq < SLEEP_VELOCITY_SQ && atHome && sqDist > REPULSION_RADIUS_SQ)
                 {
                     item.sleeping = true;
+                    item.x = item.homeX;
+                    item.y = item.homeY;
+                    item.vx = 0;
+                    item.vy = 0;
                 }
             }
-        });
+        }
 
         requestAnimationFrame(animate);
     }
