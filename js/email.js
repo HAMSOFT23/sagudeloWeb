@@ -6,7 +6,9 @@ function toggleEmail()
     const state0 = document.getElementById("email-state-0");
     const state1 = document.getElementById("email-state-1");
     const state2 = document.getElementById("email-state-2");
-    const container = document.getElementById("email-container");
+    const button = document.getElementById("email-button");
+
+    if (!state0 || !state1 || !state2 || !button) return;
 
     if (currentState === 0)
     {
@@ -15,6 +17,7 @@ function toggleEmail()
         state1.style.backgroundColor = "var(--foreground)";
         state1.style.color = "var(--background)";
         state1.style.padding = "0 4px";
+        button.setAttribute("aria-label", "Copy email address to clipboard");
         currentState = 1;
     }
     else if (currentState === 1)
@@ -24,18 +27,35 @@ function toggleEmail()
         state2.style.backgroundColor = "var(--foreground)";
         state2.style.color = "var(--background)";
         state2.style.padding = "0 4px";
+        button.setAttribute("aria-label", "Email copied to clipboard");
         currentState = 2;
 
-        navigator.clipboard.writeText(email);
+        navigator.clipboard.writeText(email).catch(function()
+        {
+            // Fallback for browsers that block clipboard access.
+        });
 
         setTimeout(function()
         {
             state2.style.display = "none";
             state0.style.display = "block";
-            container.style.backgroundColor = "transparent";
-            container.style.color = "";
-            container.style.padding = "0";
+            button.style.backgroundColor = "transparent";
+            button.style.color = "";
+            button.style.padding = "0";
+            button.setAttribute("aria-label", "Show email address");
             currentState = 0;
         }, 3000);
     }
 }
+
+(function()
+{
+    document.addEventListener("DOMContentLoaded", function()
+    {
+        const button = document.getElementById("email-button");
+        if (button)
+        {
+            button.addEventListener("click", toggleEmail);
+        }
+    });
+})();

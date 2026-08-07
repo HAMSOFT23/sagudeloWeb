@@ -2,6 +2,7 @@
 {
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*^';
     const INTERVAL = 40;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function randomChar()
     {
@@ -24,6 +25,12 @@
             }
 
             const text = this.dataset.original;
+
+            if (reducedMotion)
+            {
+                return;
+            }
+
             var step = 0;
             var lastTick = 0;
 

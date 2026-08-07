@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samuel Andrés Agudelo</title>
     <meta name="description" content="Creating fun games and unforgettable stories.">
+    <meta name="robots" content="index, follow">
     <meta property="og:title" content="Samuel Andrés Agudelo">
     <meta property="og:description" content="Creating fun games and unforgettable stories.">
     <meta property="og:image" content="https://sagudelo.com/images/PortraitFav.png">
@@ -46,7 +47,9 @@
     </script>
 </head>
 <body>
-    <main>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <main id="main-content">
         <div class="content-half">
             <div class="content-wrapper">
                 <div class="title-group">
@@ -66,18 +69,18 @@
 
                 <div class="email-row">
                     <p>You can reach me at</p>
-                    <span id="email-container" class="contact-icon" style="cursor: pointer;">
-                        <span id="email-state-0" onclick="toggleEmail()">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="email-button" class="contact-icon" type="button" aria-label="Show email address" aria-live="polite">
+                        <span id="email-state-0">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <g>
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                     <polyline points="22,6 12,13 2,6"></polyline>
                                 </g>
                             </svg>
                         </span>
-                        <span id="email-state-1" style="display: none; font-size: clamp(12px, 1.5vw, 18px);" onclick="toggleEmail()">samuel.agudelo534@gmail.com</span>
+                        <span id="email-state-1" style="display: none; font-size: clamp(12px, 1.5vw, 18px);">samuel.agudelo534@gmail.com</span>
                         <span id="email-state-2" style="display: none; font-size: clamp(12px, 1.5vw, 18px);">COPIED!</span>
-                    </span>
+                    </button>
                 </div>
 
                 <ul>
@@ -97,7 +100,7 @@
                     <h1>I also do electronics</h1>
                 </div>
 
-                <p>I'm currently studying <span>Electronic Engineering</span> at College and working on a handheld <a href="/blog/doom_console_blog.html" rel="noopener noreferrer">Doom Console</a>
+                <p>I'm currently studying <span>Electronic Engineering</span> at College and working on a handheld <a href="/blog/doom-console.html" rel="noopener noreferrer">Doom Console</a>
                 </p>
 
 

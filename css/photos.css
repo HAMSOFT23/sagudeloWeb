@@ -43,6 +43,13 @@
     cursor: pointer;
     contain: layout style paint;
     will-change: transform;
+    border-radius: 4px;
+}
+
+.floating-photo:focus-visible
+{
+    outline: 3px solid var(--foreground);
+    outline-offset: 4px;
 }
 
 .floating-photo img

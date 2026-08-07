@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photos - Samuel Andrés Agudelo</title>
     <meta name="description" content="Photo portfolio by Samuel Andrés Agudelo.">
+    <meta name="robots" content="index, follow">
     <meta property="og:title" content="Photos - Samuel Andrés Agudelo">
     <meta property="og:description" content="Photo portfolio by Samuel Andrés Agudelo.">
     <meta property="og:image" content="https://sagudelo.com/images/PortraitFav.png">
@@ -30,15 +31,17 @@
     <link rel="icon" href="images/PortraitFav.png">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <a href="/index.html" class="back-link">← Back</a>
 
-    <header class="photos-header">
+    <header class="photos-header" id="main-content">
         <h1>My Photos</h1>
         <p>I like to capture life.</p>
         <p>Want to see <a href="https://www.instagram.com/sagudelophoto/" target="_blank" rel="noopener noreferrer">more</a>?</p>
     </header>
 
-    <div id="photo-canvas"></div>
+    <div id="photo-canvas" role="list" aria-label="Photo gallery"></div>
 
     <script src="js/photos.js" defer></script>
     <script src="js/scramble.js" defer></script>

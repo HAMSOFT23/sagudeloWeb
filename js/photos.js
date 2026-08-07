@@ -47,6 +47,16 @@
     var canvas = document.getElementById("photo-canvas");
     if (!canvas) return;
 
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", function(e)
+    {
+        reducedMotion = e.matches;
+        for (var i = 0; i < items.length; i++)
+        {
+            items[i].sleeping = false;
+        }
+    });
+
     var expandedItem = null;
     var overlay = null;
     var overlayOpacity = 0;
@@ -170,6 +180,7 @@
         item.phase = "expanding";
         item.sleeping = false;
         item.el.style.zIndex = "11";
+        item.el.setAttribute("aria-expanded", "true");
 
         targetOverlayOpacity = 1;
         overlay.classList.add("active");
@@ -195,6 +206,7 @@
         item.targetRotation = item.originalRotation;
         item.phase = "collapsing";
         item.sleeping = false;
+        item.el.setAttribute("aria-expanded", "false");
 
         targetOverlayOpacity = 0;
         overlay.classList.remove("active");
@@ -206,6 +218,18 @@
             item.el.removeEventListener("mouseenter", showTooltip);
             item.el.removeEventListener("mouseleave", hideTooltip);
             destroyTooltip();
+        }
+    }
+
+    function onPhotoActivate(item)
+    {
+        if (item.phase === "normal")
+        {
+            expandPhoto(item);
+        }
+        else if (item.phase === "expanded")
+        {
+            window.open("https://www.instagram.com/sagudelophoto/", "_blank", "noopener,noreferrer");
         }
     }
 
@@ -229,10 +253,14 @@
 
             var div = document.createElement("div");
             div.className = "floating-photo";
+            div.setAttribute("role", "listitem");
+            div.setAttribute("tabindex", "0");
+            div.setAttribute("aria-label", photo.description || "Photo " + (i + 1));
+            div.setAttribute("aria-expanded", "false");
 
             var img = document.createElement("img");
             img.src = photo.src;
-            img.alt = photo.src.split("/").pop().split(".")[0];
+            img.alt = photo.description || "";
             img.loading = "lazy";
             img.decoding = "async";
             div.appendChild(img);
@@ -289,13 +317,25 @@
 
             (function(idx)
             {
+                var photoItem = items[idx];
+
                 div.addEventListener("click", function(e)
                 {
-                    var item = items[idx];
-                    if (item.phase === "normal")
+                    e.stopPropagation();
+                    onPhotoActivate(photoItem);
+                });
+
+                div.addEventListener("keydown", function(e)
+                {
+                    if (e.key === "Enter" || e.key === " ")
                     {
-                        e.stopPropagation();
-                        expandPhoto(item);
+                        e.preventDefault();
+                        onPhotoActivate(photoItem);
+                    }
+                    else if (e.key === "Escape" && expandedItem)
+                    {
+                        e.preventDefault();
+                        collapsePhoto();
                     }
                 });
             })(i);
@@ -304,6 +344,7 @@
 
     document.addEventListener("mousemove", function(e)
     {
+        if (reducedMotion) return;
         mouse.x = e.clientX;
         mouse.y = e.clientY;
     });
@@ -312,6 +353,15 @@
     {
         mouse.x = -9999;
         mouse.y = -9999;
+    });
+
+    document.addEventListener("keydown", function(e)
+    {
+        if (e.key === "Escape" && expandedItem)
+        {
+            e.preventDefault();
+            collapsePhoto();
+        }
     });
 
     function animate()
@@ -371,6 +421,16 @@
             }
             else
             {
+                if (reducedMotion)
+                {
+                    item.x = item.homeX;
+                    item.y = item.homeY;
+                    item.vx = 0;
+                    item.vy = 0;
+                    applyTransform(item, 1);
+                    continue;
+                }
+
                 if (item.sleeping)
                 {
                     var cdx = item.x + item.width * 0.5 - mouse.x;
