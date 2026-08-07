@@ -56,14 +56,125 @@ main
     margin: 0;
 }
 
-.blog-post
+.blog-entry .entry-meta
 {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: clamp(10px, 1.2vw, 14px);
+    opacity: 0.7;
 }
 
-.blog-post .blog-entry
+.blog-entry .entry-tags
 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+}
+
+.blog-entry .entry-tags li
+{
+    font-size: clamp(10px, 1.2vw, 14px);
+    opacity: 0.6;
+}
+
+.empty-blog
+{
+    opacity: 0.7;
+    margin-top: 16px;
+}
+
+.blog-post
+{
+    text-align: left;
+    max-width: 720px;
     margin: 0 auto;
+    padding: 32px;
+}
+
+.blog-post .post-header
+{
+    margin-bottom: 32px;
+}
+
+.blog-post .post-meta
+{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    font-size: clamp(10px, 1.2vw, 14px);
+    opacity: 0.7;
+}
+
+.blog-post .post-tags
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+}
+
+.blog-post .post-tags li
+{
+    font-size: clamp(10px, 1.2vw, 14px);
+    opacity: 0.6;
+}
+
+.blog-post .post-content h2,
+.blog-post .post-content h3,
+.blog-post .post-content h4
+{
+    margin: 32px 0 16px;
+}
+
+.blog-post .post-content p
+{
+    margin: 0 0 16px;
+    line-height: 1.6;
+    text-transform: none;
+}
+
+.blog-post .post-content ul
+{
+    margin: 0 0 16px 24px;
+    list-style: disc;
+    text-transform: none;
+}
+
+.blog-post .post-content a
+{
+    text-decoration: underline;
+}
+
+.related-posts
+{
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.related-posts h2
+{
+    font-size: clamp(16px, 2.5vw, 24px);
+    margin-bottom: 16px;
+}
+
+.related-posts ul
+{
+    list-style: none;
+    padding: 0;
+}
+
+.related-posts li
+{
+    margin-bottom: 8px;
 }
 
 @media only screen and (max-width: 768px)
@@ -71,5 +182,10 @@ main
     .blog-list
     {
         gap: 32px;
+    }
+
+    .blog-post
+    {
+        padding: 16px;
     }
 }

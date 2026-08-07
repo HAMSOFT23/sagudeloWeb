@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Samuel Andrés Agudelo - Blog</title>
+    <link>https://sagudelo.com/blog/blogIndex.html</link>
+    <description>Game design, development, electronics, and photography.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 06 Aug 2026 22:18:45 -0500</lastBuildDate>
+    <item>
+      <title>Outn't Post-Mortem</title>
+      <link>https://sagudelo.com/blog/outnt-post-mortem.html</link>
+      <description>My First Game Under Artesano Games Label</description>
+      <pubDate>Sat, 04 Jul 2026 00:14:00 -0500</pubDate>
+      <guid>https://sagudelo.com/blog/outnt-post-mortem.html</guid>
+    </item>
+    <item>
+      <title>Hi</title>
+      <link>https://sagudelo.com/blog/hi.html</link>
+      <description>My first entry — what I have been doing and the goal of this website.</description>
+      <pubDate>Sun, 03 May 2026 12:00:00 -0500</pubDate>
+      <guid>https://sagudelo.com/blog/hi.html</guid>
+    </item>
+    <item>
+      <title>Doom Console</title>
+      <link>https://sagudelo.com/blog/doom-console.html</link>
+      <description>Building a handheld console that runs Doom — a work in progress.</description>
+      <pubDate>Mon, 27 Apr 2026 12:00:00 -0500</pubDate>
+      <guid>https://sagudelo.com/blog/doom-console.html</guid>
+    </item>
+  </channel>
+</rss>
