@@ -4,6 +4,7 @@ description: "Building a handheld console that runs Doom — a work in progress.
 date: "2026-04-27T12:00:00-05:00"
 tags: ["electronics", "doom", "embedded"]
 draft: false
+background: /images/DSCN6874.jpg
 ---
 
 # Building a handheld that plays Doom

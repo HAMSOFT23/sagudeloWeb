@@ -22,14 +22,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300&display=swap" rel="stylesheet">
 
-    <link rel="preload" as="image" href="/images/wide_img.jpg">
+    <link rel="preload" as="image" href="/images/DSCN6874.jpg">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/blog.css">
 
+    <style>
+        body { background-image: url('/images/DSCN6874.jpg'); background-blend-mode: soft-light; }
+    </style>
+
     <link rel="preload" as="font" href="/minimal/Fonts/DepartureMono-1.500/DepartureMono-Regular.woff2" type="font/woff2" crossorigin>
 
-    <link rel="icon" href="../images/Hamsioft.jpg">
+    <link rel="icon" href="../images/PortraitFav.png">
 </head>
 <body>
     <a href="/index.html" class="back-link">← Back</a>
@@ -38,11 +42,37 @@
         <h1>Blog</h1>
         <p>My personal entries</p>
 
-        <section class="blog-list" id="blog-list"></section>
+        <section class="blog-list" id="blog-list">
+            <article class="blog-entry">
+    <div class="entry-meta">
+        <time datetime="2026-07-04T00:14:00-05:00">04/07/26 12:14 a.m.</time>
+        <span class="read-time">1 min read</span>
+    </div>
+    <h2><a href="/blog/outnt-post-mortem.html">Outn't Post-Mortem</a></h2>
+    <ul class="entry-tags" aria-label="Tags"><li>#Unity</li><li>#Gamedev</li><li>#Indiedev</li></ul>
+    <p>My First Game Under Artesano Games Label</p>
+</article>
+<article class="blog-entry">
+    <div class="entry-meta">
+        <time datetime="2026-05-03T12:00:00-05:00">03/05/26 12:00 p.m.</time>
+        <span class="read-time">1 min read</span>
+    </div>
+    <h2><a href="/blog/hi.html">Hi</a></h2>
+    <p>My first entry — what I have been doing and the goal of this website.</p>
+</article>
+<article class="blog-entry">
+    <div class="entry-meta">
+        <time datetime="2026-04-27T12:00:00-05:00">27/04/26 12:00 p.m.</time>
+        <span class="read-time">1 min read</span>
+    </div>
+    <h2><a href="/blog/doom-console.html">Doom Console</a></h2>
+    <ul class="entry-tags" aria-label="Tags"><li>#electronics</li><li>#doom</li><li>#embedded</li></ul>
+    <p>Building a handheld console that runs Doom — a work in progress.</p>
+</article>
+        </section>
     </main>
 
-    <script src="blogData.js" defer></script>
-    <script src="../js/blog.js" defer></script>
     <script src="../js/scramble.js" defer></script>
+    <script src="../js/parallax.js" defer></script>
 </body>
 </html>

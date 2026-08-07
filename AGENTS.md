@@ -5,7 +5,7 @@
 
 ## Quick Start
 1. Edit HTML files directly — no build step needed for site pages
-2. Blog posts live in `blog/posts/*.md`; after editing, run `python3 tools/build.py` to regenerate post pages, `blogData.js`, `feed.xml`, and `sitemap.xml`
+2. Blog posts live in `blog/posts/*.md`; run `python3 tools/blog.py build` to regenerate post pages, `blogIndex.html`, `feed.xml`, and `sitemap.xml` — or keep `python3 tools/blog.py watch`/`dev` running while editing
 3. Deploy static files to any host (Netlify, Vercel, GitHub Pages, etc.)
 
 ## Architecture
@@ -13,15 +13,15 @@
 |------|---------|
 | `index.html` | Home / bio — split-layout, interactive elements |
 | `photos.html` | Photo portfolio — physics-based floating canvas |
-| `blog/blogIndex.html` | Blog listing rendered from `blogData.js` |
-| `blog/*.html` | Individual blog posts (generated from Markdown by `tools/build.py`) |
+| `blog/blogIndex.html` | Blog listing (generated statically by `tools/blog.py`) |
+| `blog/*.html` | Individual blog posts (generated from Markdown by `tools/blog.py`) |
 
 ## a. Minimalism
 - **No build tools** — plain HTML, CSS, and vanilla JS
 - **Single-file pages** — each route is a self-contained HTML file
 - **Typography-first** — DepartureMono (custom WOFF2) + Roboto Mono fallback, uppercase, `font-weight: 300`
 - **Split-layout homepage** — left column (bio + links) and right column (electronics + blog) on desktop; stacks vertically on mobile
-- **Full-bleed background** — single background image (`wide_img.png`) with `soft-light` blend mode, covering `100vh`
+- **Full-bleed background** — single background image (`DSCN6874.jpg`) with `soft-light` blend mode, covering `100vh`
 
 ## b. Color Palette
 | Token | Value | Usage |
@@ -48,13 +48,14 @@
    - Sleep/wake optimization for off-screen and idle items
 
 ## d. Blog
-- Posts are written as Markdown in `blog/posts/*.md` (frontmatter: `title`, `description`, `date` or `auto`, `tags`, `draft`)
-- `python3 tools/build.py` generates post pages, `blogData.js`, `feed.xml`, updates `sitemap.xml`, and writes a redirect for `doom_console_blog.html` → `doom-console.html`
-- `tools/new-post.py "Title"` scaffolds a new draft post
-- Data-driven index: `blog/blogData.js` exports an array of entries
-- `js/blog.js` sorts by date (newest first) and injects `<article>` elements into `blog/blogIndex.html` (date + read time → title → plain-text tags → description)
-- Individual posts are static HTML pages styled with `css/blog.css`
-- Drafts: rendered to HTML with `noindex` but excluded from `blogData.js`, `feed.xml`, and `sitemap.xml`
+- All-in-one workflow: `python3 tools/blog.py` with subcommands `new "Title"`, `build`, `watch`, `dev`
+  - `new "Title"` scaffolds a draft post; media files go in `blog/media/`
+  - `build` generates post pages, the static `blogIndex.html`, `feed.xml`, updates `sitemap.xml`, writes the `doom_console_blog.html` → `doom-console.html` redirect, and removes stale blog HTML
+  - `watch` rebuilds automatically when any post changes; `dev` also serves the site locally and opens the browser
+- Post frontmatter: `title`, `description`, `date` (`auto` = file mtime, stable across builds) or ISO date, `tags`, `draft`, optional `slug` (stable URL), optional `background` (image path for the page bg)
+- Markdown support: headings, bold/italic, links, inline code, fenced code blocks (```lang), blockquotes, ordered/unordered lists, raw HTML passthrough (lines starting with `<`)
+- Media syntax: `![alt](path)` → lazy `<img>`; `.mp4/.webm/.ogg` → `<video controls>`; YouTube URLs (watch/shorts/embed/youtu.be) → 16:9 lazy embed; `![alt](src "caption")` → figure with caption
+- Drafts: rendered to HTML with `noindex` but excluded from `blogIndex.html`, `feed.xml`, and `sitemap.xml`
 - No persistent nav bar across pages — each page is standalone (only a `← Back` link on subpages)
 
 ## Key Files
@@ -62,16 +63,14 @@
 |------|---------|
 | `css/main.css` | Global styles, typography, layout, mobile breakpoint |
 | `css/photos.css` | Photo canvas layout and floating-photo styling |
-| `css/blog.css` | Blog list and entry styling |
+| `css/blog.css` | Blog list, post, and media styling |
 | `js/email.js` | Email toggle + clipboard copy |
 | `js/scramble.js` | Hover scramble effect for all links |
 | `js/parallax.js` | Mouse-driven background parallax |
 | `js/photos.js` | Physics-based photo canvas |
-| `js/blog.js` | Blog index renderer |
-| `blog/blogData.js` | Blog entry data source |
 | `blog/posts/*.md` | Blog post sources (Markdown) |
-| `tools/build.py` | Build: post pages, blogData.js, feed.xml, sitemap |
-| `tools/new-post.py` | Scaffold a new draft post |
+| `blog/media/` | Post images, GIFs, and videos |
+| `tools/blog.py` | Blog workflow: new / build / watch / dev |
 | `minimal/Fonts/DepartureMono-1.500/` | Custom font files (OTF, WOFF, WOFF2) |
 
 ## Development

@@ -4,6 +4,7 @@ description: "My first entry — what I have been doing and the goal of this web
 date: "2026-05-03T12:00:00-05:00"
 tags: []
 draft: false
+background: /images/DSCN6874.jpg
 ---
 
 # So this is my first entry to the blog, I will talk about what I have been doing this few months and my goal with this website.

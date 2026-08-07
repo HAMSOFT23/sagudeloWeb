@@ -33,6 +33,20 @@ function toggleEmail()
         navigator.clipboard.writeText(email).catch(function()
         {
             // Fallback for browsers that block clipboard access.
+            var ta = document.createElement("textarea");
+            ta.value = email;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try
+            {
+                document.execCommand("copy");
+            }
+            catch (e)
+            {
+            }
+            document.body.removeChild(ta);
         });
 
         setTimeout(function()

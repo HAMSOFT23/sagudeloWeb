@@ -1,6 +1,9 @@
 main
 {
     display: block;
+    max-width: 550px;
+    margin: 64px 0 0 0;
+    padding: 0 0 0 32px;
 }
 
 .back-link
@@ -175,6 +178,97 @@ main
 .related-posts li
 {
     margin-bottom: 8px;
+}
+
+.blog-post .post-content img,
+.blog-post .post-content video
+{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.blog-post .post-content figure
+{
+    margin: 0 0 16px;
+    text-align: center;
+}
+
+.blog-post .post-content figcaption
+{
+    font-size: clamp(10px, 1.2vw, 14px);
+    opacity: 0.6;
+    margin-top: 8px;
+}
+
+.blog-post .post-content .embed-video
+{
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.blog-post .post-content .embed-video iframe
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.blog-post .post-content pre
+{
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 0 0 16px;
+}
+
+.blog-post .post-content pre code
+{
+    font-family: 'Roboto Mono', monospace;
+    font-size: clamp(11px, 1.3vw, 15px);
+    text-transform: none;
+    white-space: pre;
+}
+
+.blog-post .post-content code
+{
+    font-family: 'Roboto Mono', monospace;
+    text-transform: none;
+}
+
+.blog-post .post-content p code
+{
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0 4px;
+    border-radius: 2px;
+    font-size: clamp(11px, 1.3vw, 15px);
+}
+
+.blog-post .post-content blockquote
+{
+    margin: 0 0 16px;
+    padding: 8px 16px;
+    border-left: 2px solid var(--foreground);
+    opacity: 0.85;
+}
+
+.blog-post .post-content ol
+{
+    margin: 0 0 16px 24px;
+    list-style: decimal;
+    text-transform: none;
 }
 
 @media only screen and (max-width: 768px)
